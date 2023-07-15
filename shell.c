@@ -17,7 +17,6 @@ void display_prompt(void)
 /**
  * read_command - Read the user's command from standard input.
  * @command: The command buffer.
- * @environ: The array of environment variables.
  */
 void read_command(char *command)
 {
@@ -29,6 +28,7 @@ void read_command(char *command)
 /**
  * execute_command - Execute the given command.
  * @command: The command to execute.
+ * @environ: The array of environment variables.
  */
 void execute_command(const char *command, char **environ)
 {
