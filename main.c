@@ -3,20 +3,30 @@
 #include <string.h>
 #include "shell.h"
 
-int main(void) {
-    char command[MAX_COMMAND_LENGTH];
-    int running = 1;
+/**
+ * main - Entry point of the program.
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+	char command[MAX_COMMAND_LENGTH];
+	int running = 1;
 
-    while (running) {
-        display_prompt();
-        read_command(command);
-        
-        if (strcmp(command, "exit") == 0) {
-            running = 0;
-        } else {
-            execute_command(command);
-        }
-    }
+	while (running)
+	{
+		display_prompt();
+		read_command(command);
 
-    return 0;
+		if (strcmp(command, "exit") == 0)
+		{
+			running = 0;
+		}
+		else
+		{
+			execute_command(command);
+		}
+	}
+
+	return 0;
 }
