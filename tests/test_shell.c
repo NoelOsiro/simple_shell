@@ -45,10 +45,9 @@ void test_display_prompt_and_read_command(void)
  * test_execute_command - Validates that commands are executed correctly.
  * Validates that commands are executed correctly.
  */
-void test_execute_command(void)
+void test_execute_command(char **environ)
 {
 	char command[MAX_COMMAND_LENGTH];
-	extern char **environ;
 
 	printf("Test 4: Execute an existing command\n");
 	printf("Please enter an existing command (e.g., 'ls'):\n");
@@ -74,8 +73,10 @@ void test_execute_command(void)
  */
 int main(void)
 {
+    extern char **environ;
+
 	test_display_prompt_and_read_command();
-	test_execute_command();
+	test_execute_command(environ);
 
 	return (0);
 }
