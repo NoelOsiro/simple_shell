@@ -7,7 +7,7 @@
 #include "../shell.h"
 
 /**
- * Test the display_prompt() and read_command() functions.
+ * test_display_prompt_and_read_command - function.
  *
  * Validates that the prompt is displayed correctly
  * and the user's commands are read properly.
@@ -42,7 +42,7 @@ void test_display_prompt_and_read_command(void)
 }
 
 /**
- * execute_command - Validates that commands are executed correctly.
+ * test_execute_command - Validates that commands are executed correctly.
  * Validates that commands are executed correctly.
  */
 void test_execute_command(void)
