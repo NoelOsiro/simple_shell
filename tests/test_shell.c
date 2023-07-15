@@ -8,9 +8,11 @@
 
 /**
  * Test the display_prompt() and read_command() functions.
- * Validates that the prompt is displayed correctly and the user's commands are read properly.
+ * Validates that the prompt is displayed correctly and
+ * the user's commands are read properly.
  */
-void test_display_prompt_and_read_command() {
+void test_display_prompt_and_read_command(void)
+{
 	char command[MAX_COMMAND_LENGTH];
 
 	printf("Test 1: Display prompt and read a command\n");
@@ -29,8 +31,8 @@ void test_display_prompt_and_read_command() {
 	printf("Command entered: %s\n", command);
 	printf("Test 2 passed\n\n");
 
-	printf("Test 3: Display prompt and read a long command (truncated to MAX_COMMAND_LENGTH)\n");
-	printf("Please enter a long command (more than %d characters):\n", MAX_COMMAND_LENGTH);
+	printf("Test 3: Display prompt and read a long command\n");
+	printf("Please enter a long command (>> %d chars):\n", MAX_COMMAND_LENGTH);
 	display_prompt();
 	read_command(command);
 	assert(strlen(command) == MAX_COMMAND_LENGTH - 1); // Account for the null terminator
@@ -42,7 +44,8 @@ void test_display_prompt_and_read_command() {
  * Test the execute_command() function.
  * Validates that commands are executed correctly.
  */
-void test_execute_command() {
+void test_execute_command(void)
+{
 	char command[MAX_COMMAND_LENGTH];
 	extern char **environ;
 
@@ -66,9 +69,10 @@ void test_execute_command() {
 /**
  * Entry point of the test program.
  */
-int main(void) {
+int main(void)
+{
 	test_display_prompt_and_read_command();
 	test_execute_command();
 
-	return 0;
+	return (0);
 }
