@@ -5,6 +5,6 @@
 
 void display_prompt(void);
 void read_command(char *command);
-void execute_command(const char *command);
+void execute_command(const char *command, char **environ);
 
 #endif

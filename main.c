@@ -12,6 +12,7 @@ int main(void)
 {
 	char command[MAX_COMMAND_LENGTH];
 	int running = 1;
+	extern char **environ;
 
 	while (running)
 	{
@@ -24,9 +25,9 @@ int main(void)
 		}
 		else
 		{
-			execute_command(command);
+			execute_command(command, environ);
 		}
 	}
 
-	return (0);
+	return 0;
 }
