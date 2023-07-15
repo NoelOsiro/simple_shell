@@ -8,8 +8,9 @@
 
 /**
  * Test the display_prompt() and read_command() functions.
- * Validates that the prompt is displayed correctly and
- * the user's commands are read properly.
+ *
+ * Validates that the prompt is displayed correctly
+ * and the user's commands are read properly.
  */
 void test_display_prompt_and_read_command(void)
 {
@@ -35,13 +36,13 @@ void test_display_prompt_and_read_command(void)
 	printf("Please enter a long command (>> %d chars):\n", MAX_COMMAND_LENGTH);
 	display_prompt();
 	read_command(command);
-	assert(strlen(command) == MAX_COMMAND_LENGTH - 1); // Account for the null terminator
+	assert(strlen(command) == MAX_COMMAND_LENGTH - 1);
 	printf("Command entered (truncated): %s\n", command);
 	printf("Test 3 passed\n\n");
 }
 
 /**
- * Test the execute_command() function.
+ * execute_command - Validates that commands are executed correctly.
  * Validates that commands are executed correctly.
  */
 void test_execute_command(void)
@@ -67,7 +68,9 @@ void test_execute_command(void)
 }
 
 /**
- * Entry point of the test program.
+ * main - Entry point of the program.
+ *
+ * Return: Always 0.
  */
 int main(void)
 {
