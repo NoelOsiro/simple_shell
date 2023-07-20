@@ -1,11 +1,4 @@
-/*
- * File: alias_builtins.c
- * Author: John Doe
- *         Jane Smith
- */
-
 #include "my_shell.h"
-
 int my_shell_alias(char **args, char __attribute__((__unused__)) **front);
 void set_custom_alias(char *alias_name, char *value);
 void print_custom_alias(custom_alias_t *alias);
