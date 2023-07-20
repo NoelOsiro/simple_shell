@@ -1,11 +1,11 @@
 #include "my_shell.h"
 
-void *resize_memory_block(void *ptr, unsigned int old_size, unsigned int new_size);
+void *resize_memory(void *ptr, unsigned int old_size, unsigned int new_size);
 void assign_line_pointer(char **lineptr, size_t *n, char *buffer, size_t buffer_size);
 ssize_t read_line(char **lineptr, size_t *n, FILE *stream);
 
 /**
- * resize_memory_block - Reallocates a memory block using malloc and free.
+ * resize_memory - Reallocates a memory block using malloc and free.
  * @ptr: A pointer to the memory previously allocated.
  * @old_size: The size in bytes of the allocated space for ptr.
  * @new_size: The size in bytes for the new memory block.
@@ -14,7 +14,7 @@ ssize_t read_line(char **lineptr, size_t *n, FILE *stream);
  *         If new_size == 0 and ptr is not NULL - NULL.
  *         Otherwise - a pointer to the reallocated memory block.
  */
-void *resize_memory_block(void *ptr, unsigned int old_size, unsigned int new_size)
+void *resize_memory(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *mem;
 	char *ptr_copy, *filler;
@@ -82,7 +82,7 @@ void assign_line_pointer(char **lineptr, size_t *n, char *buffer, size_t buffer_
 	}
 	else
 	{
-		_strcpy(*lineptr, buffer);
+		copy_string(*lineptr, buffer);
 		free(buffer);
 	}
 }
@@ -127,7 +127,7 @@ ssize_t read_line(char **lineptr, size_t *n, FILE *stream)
 		}
 
 		if (input >= 120)
-			buffer = resize_memory_block(buffer, input, input + 1);
+			buffer = resize_memory(buffer, input, input + 1);
 
 		buffer[input] = c;
 		input++;

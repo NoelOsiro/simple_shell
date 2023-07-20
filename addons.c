@@ -1,11 +1,16 @@
 #include "my_shell.h"
 
+void free_arguments(char **args, char **front);
+char *get_process_id(void);
+char *find_env_value(char *beginning, int len);
+void replace_variables(char **args, int *result);
+
 /**
  * release_memory - Frees up memory taken by args.
  * @args: A null-terminated double pointer containing commands/arguments.
  * @front: A double pointer to the beginning of args.
  */
-void release_memory(char **args, char **front)
+void free_arguments(char **args, char **front)
 {
 	size_t i;
 
@@ -91,13 +96,13 @@ char *find_env_value(char *var_name, int var_len)
 /**
  * replace_variables - Handles variable replacement.
  * @line: A double pointer containing the command and arguments.
- * @exe_ret: A pointer to the return value of the last executed command.
+ * @result: A pointer to the return value of the last executed command.
  *
  * Description: Replaces $$ with the current PID, $? with the return value
  *              of the last executed program, and environmental variables
  *              preceded by $ with their corresponding value.
  */
-void replace_variables(char **line, int *exe_ret)
+void replace_variables(char **line, int *result)
 {
 	int j, k = 0, len;
 	char *replacement = NULL, *old_line = NULL, *new_line;
@@ -115,7 +120,7 @@ void replace_variables(char **line, int *exe_ret)
 			}
 			else if (old_line[j + 1] == '?')
 			{
-				replacement = convert_int_to_string(*exe_ret);
+				replacement = convert_int_to_string(*result);
 				k = j + 2;
 			}
 			else if (old_line[j + 1])

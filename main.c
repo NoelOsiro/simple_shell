@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 1)
 	{
-		ret = proc_file_commands(argv[1], exe_ret);
+		ret = process_file_commands(argv[1], exe_ret);
 		free_environment();
 		free_alias_list(custom_aliases);
 		return (*exe_ret);

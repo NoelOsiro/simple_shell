@@ -2,7 +2,7 @@
 
 int calculate_num_length(int num);
 char *convert_int_to_string(int num);
-int display_custom_error(char **args, int err);
+int create_error_message(char **args, int err);
 
 /**
  * calculate_num_length - Counts the digit length of a number.
@@ -72,13 +72,13 @@ char *convert_int_to_string(int num)
 }
 
 /**
- * display_custom_error - Writes a custom error message to stderr.
+ * create_error_message - Writes a custom error message to stderr.
  * @args: An array of arguments.
  * @err: The error value.
  *
  * Return: The error value.
  */
-int display_custom_error(char **args, int err)
+int create_error_message(char **args, int err)
 {
 	char *error;
 

@@ -16,9 +16,9 @@ int (*get_custom_builtin(char *command))(char **args, char **front)
 {
 	custom_command_t funcs[] = {
 		{ "exit", my_shell_exit },
-		{ "env", my_shell_env },
-		{ "setenv", my_shell_setenv },
-		{ "unsetenv", my_shell_unsetenv },
+		{ "env", display_env },
+		{ "setenv", display_setenv },
+		{ "unsetenv", display_unsetenv },
 		{ "cd", my_shell_cd },
 		{ "alias", my_shell_alias },
 		{ "help", my_shell_help },
@@ -142,12 +142,12 @@ int my_shell_cd(char **args, char __attribute__((__unused__)) **front)
 
 	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
-	if (my_shell_setenv(dir_info, dir_info) == -1)
+	if (display_setenv(dir_info, dir_info) == -1)
 		return (-1);
 
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
-	if (my_shell_setenv(dir_info, dir_info) == -1)
+	if (display_setenv(dir_info, dir_info) == -1)
 		return (-1);
 	if (args[0] && args[0][0] == '-' && args[0][1] != '-')
 	{

@@ -63,7 +63,7 @@ int execute_arguments(char **args, char **front, int *result);
 int handle_arguments(int *result);
 int validate_arguments(char **args);
 void free_arguments(char **args, char **front);
-char **replace_aliases(char **args);
+char **replace_custom_aliases(char **args);
 
 /* String functions */
 int get_string_length(const char *s);
@@ -76,11 +76,11 @@ int compare_strings(char *s1, char *s2);
 int compare_strings_n(const char *s1, const char *s2, size_t n);
 
 /* Custom Commands */
-int (*get_custom_command(char *command))(char **args, char **front);
+int (*get_custom_builtin(char *command))(char **args, char **front);
 int my_shell_exit(char **args, char **front);
-int my_shell_env(char **args, char __attribute__((__unused__)) **front);
-int my_shell_setenv(char **args, char __attribute__((__unused__)) **front);
-int my_shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
+int display_env(char **args, char __attribute__((__unused__)) **front);
+int display_setenv(char **args, char __attribute__((__unused__)) **front);
+int display_unsetenv(char **args, char __attribute__((__unused__)) **front);
 int my_shell_cd(char **args, char __attribute__((__unused__)) **front);
 int my_shell_alias(char **args, char __attribute__((__unused__)) **front);
 int my_shell_help(char **args, char __attribute__((__unused__)) **front);
