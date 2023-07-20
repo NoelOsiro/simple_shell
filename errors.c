@@ -85,24 +85,24 @@ int display_custom_error(char **args, int err)
 	switch (err)
 	{
 	case -1:
-		error = get_error_env(args);
+		error = error_message_env(args);
 		break;
 	case 1:
-		error = get_error_1(args);
+		error = error_message_1(args);
 		break;
 	case 2:
 		if (*(args[0]) == 'e')
-			error = get_error_2_exit(++args);
+			error = error_message_2_exit(++args);
 		else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
-			error = get_error_2_syntax(args);
+			error = error_message_2_syntax(args);
 		else
-			error = get_error_2_cd(args);
+			error = error_message_2_cd(args);
 		break;
 	case 126:
-		error = get_error_126(args);
+		error = error_message_126(args);
 		break;
 	case 127:
-		error = get_error_127(args);
+		error = error_message_127(args);
 		break;
 	default:
 		error = NULL;

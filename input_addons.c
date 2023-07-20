@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "my_shell.h"
 
 char *get_command(char *line, int *last_exit_code);
 int handle_commands(int *last_exit_code);
@@ -20,20 +20,20 @@ char *get_command(char *line, int *last_exit_code)
 	if (line)
 		free(line);
 
-	read = _getline(&line, &n, STDIN_FILENO);
+	read = read_line(&line, &n, STDIN_FILENO);
 	if (read == -1)
 		return (NULL);
 	if (read == 1)
 	{
-		hist++;
+		command_history++;
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, prompt, 2);
 		return (get_command(line, last_exit_code));
 	}
 
 	line[read - 1] = '\0';
-	variable_replacement(&line, last_exit_code);
-	handle_line(&line, read);
+	replace_variables(&line, last_exit_code);
+	process_line(&line, read);
 
 	return (line);
 }
@@ -53,21 +53,21 @@ int handle_commands(int *last_exit_code)
 
 	line = get_command(line, last_exit_code);
 	if (!line)
-		return (END_OF_FILE);
+		return (EOF_MARKER);
 
-	args = _strtok(line, " ");
+	args = tokenize_string(line, " ");
 	free(line);
 	if (!args)
 		return (ret);
-	if (check_args(args) != 0)
+	if (validate_arguments(args) != 0)
 	{
 		*last_exit_code = 2;
-		free_args(args, args);
+		free_arguments(args, args);
 		return (*last_exit_code);
 	}
 
-	ret = call_args(args, args, last_exit_code);
+	ret = process_arguments(args, args, last_exit_code);
 
-	free_args(args, args);
+	free_arguments(args, args);
 	return (ret);
 }

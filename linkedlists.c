@@ -1,36 +1,36 @@
-#include "shell.h"
+#include "my_shell.h"
 
-AliasNode *add_alias_end(AliasNode **head, char *name, char *value);
-void free_alias_list(AliasNode *head);
-ListNode *add_node_end(ListNode **head, char *dir);
-void free_list(ListNode *head);
+custom_alias_t *add_alias_end(custom_alias_t **head, char *name, char *value);
+void free_alias_list(custom_alias_t *head);
+dir_list_t *add_node_end(dir_list_t **head, char *path);
+void free_list(dir_list_t *head);
 
 /**
- * add_alias_end - Adds a node to the end of an AliasNode linked list.
- * @head: A pointer to the head of the AliasNode list.
+ * add_alias_end - Adds a node to the end of an custom_alias_t linked list.
+ * @head: A pointer to the head of the custom_alias_t list.
  * @name: The name of the new alias to be added.
  * @value: The value of the new alias to be added.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the new node.
  */
-AliasNode *add_alias_end(AliasNode **head, char *name, char *value)
+custom_alias_t *add_alias_end(custom_alias_t **head, char *name, char *value)
 {
-	AliasNode *new_node = malloc(sizeof(AliasNode));
-	AliasNode *last;
+	custom_alias_t *new_node = malloc(sizeof(custom_alias_t));
+	custom_alias_t *last;
 
 	if (!new_node)
 		return (NULL);
 
 	new_node->next = NULL;
-	new_node->name = malloc(sizeof(char) * (_strlen(name) + 1));
+	new_node->name = malloc(sizeof(char) * (get_string_length(name) + 1));
 	if (!new_node->name)
 	{
 		free(new_node);
 		return (NULL);
 	}
 	new_node->value = value;
-	_strcpy(new_node->name, name);
+	copy_string(new_node->name, name);
 
 	if (*head)
 	{
@@ -46,22 +46,22 @@ AliasNode *add_alias_end(AliasNode **head, char *name, char *value)
 }
 
 /**
- * add_node_end - Adds a node to the end of a ListNode linked list.
- * @head: A pointer to the head of the ListNode list.
+ * add_node_end - Adds a node to the end of a dir_list_t linked list.
+ * @head: A pointer to the head of the dir_list_t list.
  * @dir: The directory path for the new node to contain.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the new node.
  */
-ListNode *add_node_end(ListNode **head, char *dir)
+dir_list_t *add_node_end(dir_list_t **head, char *path)
 {
-	ListNode *new_node = malloc(sizeof(ListNode));
-	ListNode *last;
+	dir_list_t *new_node = malloc(sizeof(dir_list_t));
+	dir_list_t *last;
 
 	if (!new_node)
 		return (NULL);
 
-	new_node->dir = dir;
+	new_node->path = path;
 	new_node->next = NULL;
 
 	if (*head)
@@ -78,12 +78,12 @@ ListNode *add_node_end(ListNode **head, char *dir)
 }
 
 /**
- * free_alias_list - Frees an AliasNode linked list.
- * @head: The head of the AliasNode list.
+ * free_alias_list - Frees an custom_alias_t linked list.
+ * @head: The head of the custom_alias_t list.
  */
-void free_alias_list(AliasNode *head)
+void free_alias_list(custom_alias_t *head)
 {
-	AliasNode *next;
+	custom_alias_t *next;
 
 	while (head)
 	{
@@ -95,17 +95,17 @@ void free_alias_list(AliasNode *head)
 }
 
 /**
- * free_list - Frees a ListNode linked list.
- * @head: The head of the ListNode list.
+ * free_list - Frees a dir_list_t linked list.
+ * @head: The head of the dir_list_t list.
  */
-void free_list(ListNode *head)
+void free_list(dir_list_t *head)
 {
-	ListNode *next;
+	dir_list_t *next;
 
 	while (head)
 	{
 		next = head->next;
-		free(head->dir);
+		free(head->path);
 		free(head);
 		head = next;
 	}

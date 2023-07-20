@@ -1,4 +1,4 @@
-.TH MY_SHELL 1 "November 2018" "Holberton School" "0x15. C - Simple Shell"
+.TH MY_SHELL 1 " "0x16. C - Simple Shell"
 .SH NAME
 .B myshell - simple UNIX command interpreter
 .SH SYNOPSIS

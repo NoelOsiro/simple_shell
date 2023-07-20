@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "my_shell.h"
 
 void sig_handler(int sig);
 int execute_command(char **args, char **front);
@@ -22,7 +22,7 @@ void sig_handler(int sig)
  * @front: A double pointer to the beginning of args.
  *
  * Return: If an error occurs - a corresponding error code.
- *         Otherwise - The exit value of the last executed command.
+ *		 Otherwise - The exit value of the last executed command.
  */
 int execute_command(char **args, char **front)
 {
@@ -33,15 +33,15 @@ int execute_command(char **args, char **front)
 	if (command[0] != '/' && command[0] != '.')
 	{
 		flag = 1;
-		command = find_command_location(command);
+		command = get_command_location(command);
 	}
 
 	if (!command || (access(command, F_OK) == -1))
 	{
 		if (errno == EACCES)
-			ret = create_error(args, 126);
+			ret = create_error_message(args, 126);
 		else
-			ret = create_error(args, 127);
+			ret = create_error_message(args, 127);
 	}
 	else
 	{
@@ -51,16 +51,16 @@ int execute_command(char **args, char **front)
 			if (flag)
 				free(command);
 			perror("Error child:");
-			return 1;
+			return (1);
 		}
 		if (child_pid == 0)
 		{
-			execve(command, args, environ);
+			execve(command, args, my_environ);
 			if (errno == EACCES)
-				ret = create_error(args, 126);
+				ret = create_error_message(args, 126);
 			free_environment();
-			free_args(args, front);
-			free_alias_list(aliases);
+			free_arguments(args, front);
+			free_alias_list(custom_aliases);
 			_exit(ret);
 		}
 		else
@@ -71,7 +71,7 @@ int execute_command(char **args, char **front)
 	}
 	if (flag)
 		free(command);
-	return ret;
+	return (ret);
 }
 
 /**
@@ -88,47 +88,47 @@ int main(int argc, char *argv[])
 	char *prompt = "$ ", *new_line = "\n";
 
 	program_name = argv[0];
-	history_number = 1;
-	aliases = NULL;
+	command_history = 1;
+	custom_aliases = NULL;
 	signal(SIGINT, sig_handler);
 
 	*exe_ret = 0;
-	environ = copy_environment();
-	if (!environ)
+	my_environ = copy_environment();
+	if (!my_environ)
 		exit(-100);
 
 	if (argc != 1)
 	{
-		ret = process_file_commands(argv[1], exe_ret);
+		ret = proc_file_commands(argv[1], exe_ret);
 		free_environment();
-		free_alias_list(aliases);
-		return *exe_ret;
+		free_alias_list(custom_aliases);
+		return (*exe_ret);
 	}
 
 	if (!isatty(STDIN_FILENO))
 	{
-		while (ret != END_OF_FILE && ret != EXIT)
-			ret = handle_command(exe_ret);
+		while (ret != EOF_MARKER && ret != EXIT_MARKER)
+			ret = handle_arguments(exe_ret);
 		free_environment();
-		free_alias_list(aliases);
-		return *exe_ret;
+		free_alias_list(custom_aliases);
+		return (*exe_ret);
 	}
 
 	while (1)
 	{
 		write(STDOUT_FILENO, prompt, 2);
-		ret = handle_command(exe_ret);
-		if (ret == END_OF_FILE || ret == EXIT)
+		ret = handle_arguments(exe_ret);
+		if (ret == EOF_MARKER || ret == EXIT_MARKER)
 		{
-			if (ret == END_OF_FILE)
+			if (ret == EOF_MARKER)
 				write(STDOUT_FILENO, new_line, 1);
 			free_environment();
-			free_alias_list(aliases);
+			free_alias_list(custom_aliases);
 			exit(*exe_ret);
 		}
 	}
 
 	free_environment();
-	free_alias_list(aliases);
-	return *exe_ret;
+	free_alias_list(custom_aliases);
+	return (*exe_ret);
 }

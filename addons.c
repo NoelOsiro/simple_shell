@@ -1,10 +1,5 @@
 #include "my_shell.h"
 
-void release_memory(char **args, char **front);
-char *get_process_id(void);
-char *find_env_value(char *var_name, int var_len);
-void replace_variables(char **line, int *exe_ret);
-
 /**
  * release_memory - Frees up memory taken by args.
  * @args: A null-terminated double pointer containing commands/arguments.
@@ -75,9 +70,9 @@ char *find_env_value(char *var_name, int var_len)
 	if (!var)
 		return (NULL);
 	var[0] = '\0';
-	_strncat(var, var_name, var_len);
+	concatenate_strings_n(var, var_name, var_len);
 
-	var_addr = _getenv(var);
+	var_addr = get_environment_variable(var);
 	free(var);
 	if (var_addr)
 	{
@@ -85,9 +80,9 @@ char *find_env_value(char *var_name, int var_len)
 		while (*temp != '=')
 			temp++;
 		temp++;
-		replacement = malloc(_strlen(temp) + 1);
+		replacement = malloc(get_string_length(temp) + 1);
 		if (replacement)
-			_strcpy(replacement, temp);
+			copy_string(replacement, temp);
 	}
 
 	return (replacement);
@@ -111,7 +106,7 @@ void replace_variables(char **line, int *exe_ret)
 	for (j = 0; old_line[j]; j++)
 	{
 		if (old_line[j] == '$' && old_line[j + 1] &&
-				old_line[j + 1] != ' ')
+			old_line[j + 1] != ' ')
 		{
 			if (old_line[j + 1] == '$')
 			{
@@ -120,32 +115,32 @@ void replace_variables(char **line, int *exe_ret)
 			}
 			else if (old_line[j + 1] == '?')
 			{
-				replacement = _itoa(*exe_ret);
+				replacement = convert_int_to_string(*exe_ret);
 				k = j + 2;
 			}
 			else if (old_line[j + 1])
 			{
 				/* extract the variable name to search for */
 				for (k = j + 1; old_line[k] &&
-						old_line[k] != '$' &&
-						old_line[k] != ' '; k++)
+					old_line[k] != '$' &&
+					old_line[k] != ' '; k++)
 					;
 				len = k - (j + 1);
 				replacement = find_env_value(&old_line[j + 1], len);
 			}
-			new_line = malloc(j + _strlen(replacement)
-					  + _strlen(&old_line[k]) + 1);
+			new_line = malloc(j + get_string_length(replacement)
+						+ get_string_length(&old_line[k]) + 1);
 			if (!new_line)
 				return;
 			new_line[0] = '\0';
-			_strncat(new_line, old_line, j);
+			concatenate_strings_n(new_line, old_line, j);
 			if (replacement)
 			{
-				_strcat(new_line, replacement);
+				concatenate_strings(new_line, replacement);
 				free(replacement);
 				replacement = NULL;
 			}
-			_strcat(new_line, &old_line[k]);
+			concatenate_strings(new_line, &old_line[k]);
 			free(old_line);
 			*line = new_line;
 			old_line = new_line;
