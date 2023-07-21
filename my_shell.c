@@ -1,7 +1,7 @@
 #include "my_shell.h"
 #include "commands.h"
 /**
- * run_shell() - Run the interactive shell.
+ * run_shell - Run the interactive shell.
 *
 * This function implements a simple interactive shell that continuously prompts the user for commands and executes them. The shell reads input from the standard input (stdin) and parses each line into individual tokens (words) using the specified delimiter. It then forks a new process to execute the command using the `execvp()` function, which searches for the command in the directories listed in the PATH environment variable.
 *
