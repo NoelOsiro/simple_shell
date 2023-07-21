@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 char *get_location(char *command);

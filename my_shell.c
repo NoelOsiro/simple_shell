@@ -11,6 +11,7 @@ void run_shell() {
     int i;
     int num_tokens = 0;
     char *token;
+    pid_t pid;
 
     while (1) {
         printf("%s", prompt);
@@ -43,8 +44,20 @@ void run_shell() {
             token = strtok(NULL, delim);
         }
         argv[i] = NULL;
+        pid = fork();
 
-        execmd(argv);
+        if (pid < 0) {
+            perror("Fork error");
+        } else if (pid == 0) {
+           
+            execvp(argv[0], argv);
+            perror("Execution error");
+            exit(1);
+        } else {
+           
+            int status;
+            waitpid(pid, &status, 0);
+        }
 
         for (i = 0; i < num_tokens; i++) {
             free(argv[i]);
