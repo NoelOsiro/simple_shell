@@ -1,5 +1,6 @@
 #include "my_shell.h"
 #include "commands.h"
+
 /**
 *run_shell - Run the interactive shell.
 *
@@ -58,12 +59,14 @@ void run_shell(void)
 		if (pid < 0)
 		{
 			perror("Fork error");
-		} else if (pid == 0)
+		}
+		else if (pid == 0)
 		{   
 			execvp(argv[0], argv);
 			perror("Execution error");
 			exit(1);
-		} else
+		}
+		else
 		{   
 			int status;
 			waitpid(pid, &status, 0);
