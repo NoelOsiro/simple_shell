@@ -4,11 +4,20 @@
 /**
 *run_shell - Run the interactive shell.
 *
-*This function implements a simple interactive shell that continuously prompts the user for commands and executes them. The shell reads input from the standard input (stdin) and parses each line into individual tokens (words) using the specified delimiter. It then forks a new process to execute the command using the `execvp()` function, which searches for the command in the directories listed in the PATH environment variable.
+*This function implements a simple interactive shell that continuously prompts
+*the user for commands and executes them. The shell reads input from the standard
+*input (stdin) and parses each line into individual tokens (words) using the specified delimiter. 
+*It then forks a new process to execute the command using the `execvp()` function, which searches
+*for the command in the directories listed in the PATH environment variable.
 *
-*The function uses the `getline()` function to read input lines from the user. It allocates memory for each command token and ensures proper memory deallocation after command execution. The shell waits for the command to complete using the `waitpid()` function before showing the next prompt for user input.
+*The function uses the `getline()` function to read input lines from the user.
+*It allocates memory for each command token and ensures proper memory deallocation 
+*after command execution. The shell waits for the command to complete using the `waitpid()` 
+*function before showing the next prompt for user input.
 *
-*The shell will terminate when the user presses the end-of-file (EOF) character (usually Ctrl + D on Unix-based systems) or if there's an error in memory allocation or command execution.
+*The shell will terminate when the user presses the end-of-file (EOF) character 
+*(usually Ctrl + D on Unix-based systems) or if there's an error in memory allocation or 
+*command execution.
 */
 void run_shell(void)
 {
@@ -61,13 +70,13 @@ void run_shell(void)
 			perror("Fork error");
 		}
 		else if (pid == 0)
-		{   
+		{
 			execvp(argv[0], argv);
 			perror("Execution error");
 			exit(1);
 		}
 		else
-		{   
+		{
 			int status;
 			waitpid(pid, &status, 0);
 		}
