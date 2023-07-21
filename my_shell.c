@@ -1,7 +1,7 @@
 #include "my_shell.h"
 #include "commands.h"
 /**
- * @brief Run the interactive shell.
+ * run_shell() - Run the interactive shell.
 *
 * This function implements a simple interactive shell that continuously prompts the user for commands and executes them. The shell reads input from the standard input (stdin) and parses each line into individual tokens (words) using the specified delimiter. It then forks a new process to execute the command using the `execvp()` function, which searches for the command in the directories listed in the PATH environment variable.
 *
@@ -26,12 +26,14 @@ void run_shell(void)
 	{
 		printf("%s", prompt);
 		nread = getline(&lineptr, &n, stdin);
-		if (nread == -1) {
+		if (nread == -1)
+		{
 			printf("Ski Out....\n");
 			break;
 		}
 		lineptr_copy = malloc(sizeof(char) * nread);
-		if (lineptr_copy == NULL) {
+		if (lineptr_copy == NULL)
+		{
 			perror("tsh: memory allocation error");
 			break;
 		}
@@ -39,7 +41,8 @@ void run_shell(void)
 
 		token = strtok(lineptr_copy, delim);
 
-		while (token != NULL) {
+		while (token != NULL)
+		{
 			num_tokens++;
 			token = strtok(NULL, delim);
 		}
@@ -48,7 +51,8 @@ void run_shell(void)
 		argv = malloc(sizeof(char *) * num_tokens);
 
 		token = strtok(lineptr_copy, delim);
-		for (i = 0; token != NULL; i++) {
+		for (i = 0; token != NULL; i++)
+		{
 			argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
 			strcpy(argv[i], token);
 			token = strtok(NULL, delim);
@@ -56,20 +60,24 @@ void run_shell(void)
 		argv[i] = NULL;
 		pid = fork();
 
-		if (pid < 0) {
+		if (pid < 0)
+		{
 			perror("Fork error");
-		} else if (pid == 0) {
+		} else if (pid == 0)
+		{
 		   
 			execvp(argv[0], argv);
 			perror("Execution error");
 			exit(1);
-		} else {
+		} else
+		{
 		   
 			int status;
 			waitpid(pid, &status, 0);
 		}
 
-		for (i = 0; i < num_tokens; i++) {
+		for (i = 0; i < num_tokens; i++)
+		{
 			free(argv[i]);
 		}
 		free(argv);
