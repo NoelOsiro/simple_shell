@@ -1,5 +1,15 @@
 #include "my_shell.h"
 
+/**
+ * @brief Get the absolute path of a command by searching through the directories in the PATH environment variable.
+ *
+ * This function takes the name of a command as input and searches for its absolute path by examining the directories listed in the PATH environment variable.
+ *
+ * @param command The name of the command to find the absolute path for.
+ * @return If the command is found in one of the directories in the PATH, it returns a dynamically allocated string containing the absolute path of the command.
+ *         If the command is not found in any directory or if the PATH environment variable is not set, it returns NULL.
+ *         The caller is responsible for freeing the memory allocated for the returned path using free() when it's no longer needed.
+ */
 char *get_location(char *command)
 {
     char *path, *path_copy, *path_token, *file_path;
