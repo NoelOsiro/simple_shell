@@ -38,18 +38,14 @@ void run_shell(void)
 			break;
 		}
 		strcpy(lineptr_copy, lineptr);
-
 		token = strtok(lineptr_copy, delim);
-
 		while (token != NULL)
 		{
 			num_tokens++;
 			token = strtok(NULL, delim);
 		}
 		num_tokens++;
-
 		argv = malloc(sizeof(char *) * num_tokens);
-
 		token = strtok(lineptr_copy, delim);
 		for (i = 0; token != NULL; i++)
 		{
@@ -59,29 +55,24 @@ void run_shell(void)
 		}
 		argv[i] = NULL;
 		pid = fork();
-
 		if (pid < 0)
 		{
 			perror("Fork error");
 		} else if (pid == 0)
-		{
-		   
+		{   
 			execvp(argv[0], argv);
 			perror("Execution error");
 			exit(1);
 		} else
-		{
-		   
+		{   
 			int status;
 			waitpid(pid, &status, 0);
 		}
-
 		for (i = 0; i < num_tokens; i++)
 		{
 			free(argv[i]);
 		}
 		free(argv);
-
 		free(lineptr_copy);
 	}
 	free(lineptr);
