@@ -131,5 +131,8 @@ void run_shell(void)
 {
 	char *prompt = "(Azubi)$ ";
 
-	while (execute_command(prompt) == 0);
+	while
+	(
+		execute_command(prompt) == 0
+	);
 }
