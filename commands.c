@@ -16,7 +16,7 @@
  *		passing the command's absolute path and the argument array `argv`.
  *		If the command execution is unsuccessful, an error message is displayed
  *		using `perror`.
- * @argv: Null-terminated array of strings containing the cmd and its arguments.
+ * @argv: Null-terminated array of strings containing the cmd and arguments.
  */
 void execmd(char **argv)
 {

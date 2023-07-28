@@ -10,6 +10,6 @@
 #include <unistd.h>
 
 char *get_location(char *command);
-void run_shell();
+void run_shell(void);
 
 #endif /* MY_SHELL_H */
