@@ -16,13 +16,14 @@
  *		passing the command's absolute path and the argument array `argv`.
  *		If the command execution is unsuccessful, an error message is displayed
  *		using `perror`.
- * 
- * argv: Null-terminated array of strings containing the command and its arguments.
+ * @argv: Null-terminated array of strings containing the cmd and its arguments.
  */
-void execmd(char **argv){
+void execmd(char **argv)
+{
 	char *command = NULL, *actual_command = NULL;
 
-	if (argv){
+	if (argv)
+	{
 		command = argv[0];
 		actual_command = get_location(command);
 		if (execve(actual_command, argv, NULL) == -1)
