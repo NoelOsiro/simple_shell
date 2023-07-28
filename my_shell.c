@@ -103,12 +103,11 @@ int execute_cmd(char **argv)
 	{
 		execvp(argv[0], argv);
 		return (-1);
-	} else
-	{
-		int status;
-		waitpid(pid, &status, 0);
-		return (0);
 	}
+	int status;
+
+	waitpid(pid, &status, 0);
+	return (0);
 }
 
 /**
@@ -131,5 +130,6 @@ void free_tokens(char **argv)
 void run_shell(void)
 {
 	char *prompt = "(Azubi)$ ";
+
 	while (execute_command(prompt) == 0);
 }
