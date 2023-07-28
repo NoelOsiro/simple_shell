@@ -5,7 +5,7 @@
  *
  * @ac: Number of command-line arguments.
  * @argv: Array of command-line argument strings.
- * Returns: 0 on successful completion.
+ * Return: 0 on successful completion.
  */
 int main(int ac, char **argv)
 {
