@@ -4,8 +4,8 @@
 /**
  * execute_command - Prompt the user for input and execute the entered command.
  *
- * @param prompt The prompt to display to the user.
- * Returns: 0 on successful execution, -1 on failure.
+ * @prompt: The prompt to display to the user.
+ * Return: 0 on successful execution, -1 on failure.
  */
 int execute_command(const char *prompt)
 {
@@ -42,7 +42,7 @@ int execute_command(const char *prompt)
  * tokenize_input - Tokenize the input line.
  *
  * @lineptr: The input line to tokenize.
- * Returns: a dynamically allocated array of command tokens.
+ * Return: a dynamically allocated array of command tokens.
  */
 char **tokenize_input(char *lineptr)
 {
@@ -51,6 +51,7 @@ char **tokenize_input(char *lineptr)
 	int num_tokens = 0;
 
 	char *lineptr_copy = strdup(lineptr);
+
 	if (lineptr_copy == NULL)
 	{
 		perror("tsh: memory allocation error");
@@ -65,6 +66,7 @@ char **tokenize_input(char *lineptr)
 	}
 
 	char **argv = malloc(sizeof(char *) * (num_tokens + 1));
+
 	if (argv == NULL)
 	{
 		perror("tsh: memory allocation error");
@@ -87,11 +89,12 @@ char **tokenize_input(char *lineptr)
 /**
  * execute_cmd - Execute the given command using execvp.
  * @argv: The command and its arguments as an array of strings.
- * Returns: 0 on successful execution, -1 on failure.
+ * Return: 0 on successful execution, -1 on failure.
  */
 int execute_cmd(char **argv)
 {
 	pid_t pid = fork();
+
 	if (pid < 0)
 	{
 		perror("Fork error");
