@@ -27,7 +27,7 @@ char *get_location(char *command)
 
 	while (dirs)
 	{
-		temp = malloc(_strlen(dirs->dir) + _strlen(command) + 2);
+		temp = malloc(my_strlen(dirs->dir) + my_strlen(command) + 2);
 		if (!temp)
 			return (NULL);
 
@@ -69,7 +69,7 @@ char *fill_path_dir(char *path)
 		if (path[i] == ':')
 		{
 			if (path[i + 1] == ':' || i == 0 || path[i + 1] == '\0')
-				length += _strlen(pwd) + 1;
+				length += my_strlen(pwd) + 1;
 			else
 				length++;
 		}

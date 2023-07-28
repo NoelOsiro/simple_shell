@@ -86,7 +86,7 @@ char *get_env_value(char *beginning, int len)
 		while (*temp != '=')
 			temp++;
 		temp++;
-		replacement = malloc(_strlen(temp) + 1);
+		replacement = malloc(my_strlen(temp) + 1);
 		if (replacement)
 			_strcpy(replacement, temp);
 	}
@@ -134,8 +134,8 @@ void variable_replacement(char **line, int *exe_ret)
 				len = k - (j + 1);
 				replacement = get_env_value(&old_line[j + 1], len);
 			}
-			new_line = malloc(j + _strlen(replacement)
-					  + _strlen(&old_line[k]) + 1);
+			new_line = malloc(j + my_strlen(replacement)
+					  + my_strlen(&old_line[k]) + 1);
 			if (!line)
 				return;
 			new_line[0] = '\0';

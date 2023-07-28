@@ -19,7 +19,7 @@ int cant_open(char *file_path)
 	if (!hist_str)
 		return (127);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(file_path) + 16;
+	len = my_strlen(name) + my_strlen(hist_str) + my_strlen(file_path) + 16;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -106,7 +106,7 @@ int proc_file_commands(char *file_path, int *exe_ret)
 
 	for (i = 0; args[i]; i++)
 	{
-		if (_strncmp(args[i], ";", 1) == 0)
+		if (my_strncmp(args[i], ";", 1) == 0)
 		{
 			free(args[i]);
 			args[i] = NULL;

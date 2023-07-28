@@ -23,7 +23,7 @@ char *error_env(char **args)
 		return (NULL);
 
 	args--;
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 45;
+	len = my_strlen(name) + my_strlen(hist_str) + my_strlen(args[0]) + 45;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -52,7 +52,7 @@ char *error_1(char **args)
 	char *error;
 	int len;
 
-	len = _strlen(name) + _strlen(args[0]) + 13;
+	len = my_strlen(name) + my_strlen(args[0]) + 13;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 		return (NULL);
@@ -78,7 +78,7 @@ char *error_2_exit(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 27;
+	len = my_strlen(name) + my_strlen(hist_str) + my_strlen(args[0]) + 27;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -114,7 +114,7 @@ char *error_2_cd(char **args)
 
 	if (args[0][0] == '-')
 		args[0][2] = '\0';
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 24;
+	len = my_strlen(name) + my_strlen(hist_str) + my_strlen(args[0]) + 24;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -151,7 +151,7 @@ char *error_2_syntax(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 33;
+	len = my_strlen(name) + my_strlen(hist_str) + my_strlen(args[0]) + 33;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{

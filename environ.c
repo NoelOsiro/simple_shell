@@ -26,7 +26,7 @@ char **_copyenv(void)
 
 	for (index = 0; environ[index]; index++)
 	{
-		new_environ[index] = malloc(_strlen(environ[index]) + 1);
+		new_environ[index] = malloc(my_strlen(environ[index]) + 1);
 
 		if (!new_environ[index])
 		{
@@ -65,10 +65,10 @@ char **_getenv(const char *var)
 {
 	int index, len;
 
-	len = _strlen(var);
+	len = my_strlen(var);
 	for (index = 0; environ[index]; index++)
 	{
-		if (_strncmp(var, environ[index], len) == 0)
+		if (my_strncmp(var, environ[index], len) == 0)
 			return (&environ[index]);
 	}
 
