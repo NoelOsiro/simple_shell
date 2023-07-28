@@ -8,9 +8,12 @@
 /**
  * get_location - Locates a command in the PATH.
  * @command: The name of the command to find the absolute path for.
- * Return: If the command is found in one of the directories in the PATH, it returns a dynamically allocated string containing the absolute path of the command.
- *		 If the command is not found in any directory or if the PATH environment variable is not set, it returns NULL.
- *		 The caller is responsible for freeing the memory allocated for the returned path using free() when it's no longer needed.
+ * Return: If the command is found in one of the directories in the PATH, 
+ * 		 it returns a dynamically allocated string containing the absolute path of the command.
+ *		 If the command is not found in any directory or if the PATH environment variable is not set, 
+ *		 it returns NULL.
+ *		 The caller is responsible for freeing the memory allocated for the returned path 
+ *		 using free() when it's no longer needed.
  */
 char *get_location(char *command)
 {
@@ -38,7 +41,7 @@ char *get_location(char *command)
 			if (stat(file_path, &buffer) == 0)
 			{
 				free(path_copy);
-				return file_path;
+				return (file_path);
 			} else
 			{
 				free(file_path);
@@ -48,7 +51,7 @@ char *get_location(char *command)
 		free(path_copy);
 		if (stat(command, &buffer) == 0)
 		{
-			return command;
+			return (command);
 		}
 		return (NULL);
 	}
