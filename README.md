@@ -1,59 +1,59 @@
-# shellby - Simple Shell :shell:
+# my_shell - Simple Shell :shell:
 
-A simple UNIX command interpreter written as part of the low-level programming and algorithm track at Holberton School.
+A simple UNIX command interpreter written as part of the low-level programming and algorithm track at ALX SE .
 
 ## Description :speech_balloon:
 
-**Shellby** is a simple UNIX command language interpreter that reads commands from either a file or standard input and executes them.
+**my_shell** is a simple UNIX command language interpreter that reads commands from either a file or standard input and executes them.
 
 ### Invocation :running:
 
-Usage: **shellby** [filename]
+Usage: **my_shell** [filename]
 
-To invoke **shellby**, compile all `.c` files in the repository and run the resulting executable:
+To invoke **my_shell**, compile all `.c` files in the repository and run the resulting executable:
 
 ```
-gcc *.c -o shellby
-./shellby
+gcc *.c -o my_shell
+./my_shell
 ```
 
-**Shellby** can be invoked both interactively and non-interactively. If **shellby** is invoked with standard input not connected to a terminal, it reads and executes received commands in order.
+**my_shell** can be invoked both interactively and non-interactively. If **my_shell** is invoked with standard input not connected to a terminal, it reads and executes received commands in order.
 
 Example:
 ```
-$ echo "echo 'hello'" | ./shellby
+$ echo "echo 'hello'" | ./my_shell
 'hello'
 $
 ```
 
-If **shellby** is invoked with standard input connected to a terminal (determined by [isatty](https://linux.die.net/man/3/isatty)(3)), an *interactive* shell is opened. When executing interactively, **shellby** displays the prompt `$ ` when it is ready to read a command.
+If **my_shell** is invoked with standard input connected to a terminal (determined by [isatty](https://linux.die.net/man/3/isatty)(3)), an *interactive* shell is opened. When executing interactively, **my_shell** displays the prompt `$ ` when it is ready to read a command.
 
 Example:
 ```
-$./shellby
+$./my_shell
 $
 ```
 
-Alternatively, if command line arguments are supplied upon invocation, **shellby** treats the first argument as a file from which to read commands. The supplied file should contain one command per line. **Shellby** runs each of the commands contained in the file in order before exiting.
+Alternatively, if command line arguments are supplied upon invocation, **my_shell** treats the first argument as a file from which to read commands. The supplied file should contain one command per line. **my_shell** runs each of the commands contained in the file in order before exiting.
 
 Example:
 ```
 $ cat test
 echo 'hello'
-$ ./shellby test
+$ ./my_shell test
 'hello'
 $
 ```
 
 ### Environment :deciduous_tree:
 
-Upon invocation, **shellby** receives and copies the environment of the parent process in which it was executed. This environment is an array of *name-value* strings describing variables in the format *NAME=VALUE*. A few key environmental variables are:
+Upon invocation, **my_shell** receives and copies the environment of the parent process in which it was executed. This environment is an array of *name-value* strings describing variables in the format *NAME=VALUE*. A few key environmental variables are:
 
 #### HOME
 The home directory of the current user and the default directory argument for the **cd** builtin command.
 
 ```
-$ echo "echo $HOME" | ./shellby
+$ echo "echo $HOME" | ./my_shell
 /home/vagrant
 ```
 
@@ -61,36 +61,36 @@ $ echo "echo $HOME" | ./shellby
 The current working directory as set by the **cd** command.
 
 ```
-$ echo "echo $PWD" | ./shellby
-/home/vagrant/holberton/simple_shell
+$ echo "echo $PWD" | ./my_shell
+/home/vagrant/ALX SE/simple_shell
 ```
 
 #### OLDPWD
 The previous working directory as set by the **cd** command.
 
 ```
-$ echo "echo $OLDPWD" | ./shellby
-/home/vagrant/holberton/printf
+$ echo "echo $OLDPWD" | ./my_shell
+/home/vagrant/ALX SE/printf
 ```
 
 #### PATH
 A colon-separated list of directories in which the shell looks for commands. A null directory name in the path (represented by any of two adjacent colons, an initial colon, or a trailing colon) indicates the current directory.
 
 ```
-$ echo "echo $PATH" | ./shellby
+$ echo "echo $PATH" | ./my_shell
 /home/vagrant/.cargo/bin:/home/vagrant/.local/bin:/home/vagrant/.rbenv/plugins/ruby-build/bin:/home/vagrant/.rbenv/shims:/home/vagrant/.rbenv/bin:/home/vagrant/.nvm/versions/node/v10.15.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/vagrant/.cargo/bin:/home/vagrant/workflow:/home/vagrant/.local/bin
 ```
 
 ### Command Execution :hocho:
 
-After receiving a command, **shellby** tokenizes it into words using `" "` as a delimiter. The first word is considered the command and all remaining words are considered arguments to that command. **Shellby** then proceeds with the following actions:
+After receiving a command, **my_shell** tokenizes it into words using `" "` as a delimiter. The first word is considered the command and all remaining words are considered arguments to that command. **my_shell** then proceeds with the following actions:
 1. If the first character of the command is neither a slash (`\`) nor dot (`.`), the shell searches for it in the list of shell builtins. If there exists a builtin by that name, the builtin is invoked.
-2. If the first character of the command is none of a slash (`\`), dot (`.`), nor builtin, **shellby** searches each element of the **PATH** environmental variable for a directory containing an executable file by that name.
+2. If the first character of the command is none of a slash (`\`), dot (`.`), nor builtin, **my_shell** searches each element of the **PATH** environmental variable for a directory containing an executable file by that name.
 3. If the first character of the command is a slash (`\`) or dot (`.`) or either of the above searches was successful, the shell executes the named program with any remaining given arguments in a separate execution environment.
 
 ### Exit Status :wave:
 
-**Shellby** returns the exit status of the last command executed, with zero indicating success and non-zero indicating failure.
+**my_shell** returns the exit status of the last command executed, with zero indicating success and non-zero indicating failure.
 
 If a command is not found, the return status is `127`; if a command is found but is not executable, the return status is 126.
 
@@ -98,11 +98,11 @@ All builtins return zero on success and one or two on incorrect usage (indicated
 
 ### Signals :exclamation:
 
-While running in interactive mode, **shellby** ignores the keyboard input `Ctrl+c`. Alternatively, an input of end-of-file (`Ctrl+d`) will exit the program.
+While running in interactive mode, **my_shell** ignores the keyboard input `Ctrl+c`. Alternatively, an input of end-of-file (`Ctrl+d`) will exit the program.
 
 User hits `Ctrl+d` in the third line.
 ```
-$ ./shellby
+$ ./my_shell
 $ ^C
 $ ^C
 $
@@ -110,15 +110,15 @@ $
 
 ### Variable Replacement :heavy_dollar_sign:
 
-**Shellby** interprets the `$` character for variable replacement.
+**my_shell** interprets the `$` character for variable replacement.
 
 #### $ENV_VARIABLE
 `ENV_VARIABLE` is substituted with its value.
 
 Example:
 ```
-$ echo "echo $PWD" | ./shellby
-/home/vagrant/holberton/simple_shell
+$ echo "echo $PWD" | ./my_shell
+/home/vagrant/ALX SE/simple_shell
 ```
 
 #### $?
@@ -126,7 +126,7 @@ $ echo "echo $PWD" | ./shellby
 
 Example:
 ```
-$ echo "echo $?" | ./shellby
+$ echo "echo $?" | ./my_shell
 0
 ```
 
@@ -135,30 +135,30 @@ The second `$` is substitued with the current process ID.
 
 Example:
 ```
-$ echo "echo $$" | ./shellby
+$ echo "echo $$" | ./my_shell
 6494
 ```
 
 ### Comments :hash:
 
-**Shellby** ignores all words and characters preceeded by a `#` character on a line.
+**my_shell** ignores all words and characters preceeded by a `#` character on a line.
 
 Example:
 ```
-$ echo "echo 'hello' #this will be ignored!" | ./shellby
+$ echo "echo 'hello' #this will be ignored!" | ./my_shell
 'hello'
 ```
 
 ### Operators :guitar:
 
-**Shellby** specially interprets the following operator characters:
+**my_shell** specially interprets the following operator characters:
 
 #### ; - Command separator
 Commands separated by a `;` are executed sequentially.
 
 Example:
 ```
-$ echo "echo 'hello' ; echo 'world'" | ./shellby
+$ echo "echo 'hello' ; echo 'world'" | ./my_shell
 'hello'
 'world'
 ```
@@ -168,9 +168,9 @@ $ echo "echo 'hello' ; echo 'world'" | ./shellby
 
 Example:
 ```
-$ echo "error! && echo 'hello'" | ./shellby
-./shellby: 1: error!: not found
-$ echo "echo 'all good' && echo 'hello'" | ./shellby
+$ echo "error! && echo 'hello'" | ./my_shell
+./my_shell: 1: error!: not found
+$ echo "echo 'all good' && echo 'hello'" | ./my_shell
 'all good'
 'hello'
 ```
@@ -180,14 +180,14 @@ $ echo "echo 'all good' && echo 'hello'" | ./shellby
 
 Example:
 ```
-$ echo "error! || echo 'but still runs'" | ./shellby
-./shellby: 1: error!: not found
+$ echo "error! || echo 'but still runs'" | ./my_shell
+./my_shell: 1: error!: not found
 'but still runs'
 ```
 
 The operators `&&` and `||` have equal precedence, followed by `;`.
 
-### Shellby Builtin Commands :nut_and_bolt:
+### my_shell Builtin Commands :nut_and_bolt:
 
 #### cd
   * Usage: `cd [DIRECTORY]`
@@ -199,15 +199,15 @@ The operators `&&` and `||` have equal precedence, followed by `;`.
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ pwd
-/home/vagrant/holberton/simple_shell
+/home/vagrant/ALX SE/simple_shell
 $ cd ../
 $ pwd
-/home/vagrant/holberton
+/home/vagrant/ALX SE
 $ cd -
 $ pwd
-/home/vagrant/holberton/simple_shell
+/home/vagrant/ALX SE/simple_shell
 ```
 
 #### alias
@@ -219,11 +219,11 @@ $ pwd
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ alias show=ls
 $ show
 AUTHORS            builtins_help_2.c  errors.c         linkedlist.c        shell.h       test
-README.md          env_builtins.c     getline.c        locate.c            shellby
+README.md          env_builtins.c     getline.c        locate.c            my_shell
 alias_builtins.c   environ.c          helper.c         main.c              split.c
 builtin.c          err_msgs1.c        helpers_2.c      man_1_simple_shell  str_funcs1.c
 builtins_help_1.c  err_msgs2.c        input_helpers.c  proc_file_comm.c    str_funcs2.c
@@ -237,7 +237,7 @@ builtins_help_1.c  err_msgs2.c        input_helpers.c  proc_file_comm.c    str_f
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ exit
 ```
 
@@ -247,7 +247,7 @@ $ exit
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ env
 NVM_DIR=/home/vagrant/.nvm
 ...
@@ -260,7 +260,7 @@ NVM_DIR=/home/vagrant/.nvm
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ setenv NAME Poppy
 $ echo $NAME
 Poppy
@@ -273,7 +273,7 @@ Poppy
 
 Example:
 ```
-$ ./shellby
+$ ./my_shell
 $ setenv NAME Poppy
 $ unsetenv NAME
 $ echo $NAME
@@ -292,10 +292,10 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## Acknowledgements :pray:
 
-**Shellby** emulates basic functionality of the **sh** shell. This README borrows form the Linux man pages [sh(1)](https://linux.die.net/man/1/sh) and [dash(1)](https://linux.die.net/man/1/dash).
+**my_shell** emulates basic functionality of the **sh** shell. This README borrows form the Linux man pages [sh(1)](https://linux.die.net/man/1/sh) and [dash(1)](https://linux.die.net/man/1/dash).
 
-This project was written as part of the curriculum for Holberton School. Holberton School is a campus-based full-stack software engineering program that prepares students for careers in the tech industry using project-based peer learning. For more information, visit [this link](https://www.holbertonschool.com/).
+This project was written as part of the curriculum for ALX SE . ALX SE  is a campus-based full-stack software engineering program that prepares students for careers in the tech industry using project-based peer learning. For more information, visit [this link](https://www.ALX SE.com/).
 
 <p align="center">
-  <img src="http://www.holbertonschool.com/holberton-logo.png" alt="Holberton School logo">
+  <img src="http://www.ALX SE.com/ALX SE-logo.png" alt="ALX SE  logo">
 </p>
