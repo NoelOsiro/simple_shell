@@ -66,10 +66,13 @@ int my_file_cmds(char *file_path, int *exe_ret)
 		*exe_ret = cant_open(file_path);
 		return (*exe_ret);
 	}
+
 	line = malloc(sizeof(char) * old_size);
 	if (!line)
 		return (-1);
-	do {
+
+	do
+	{
 		b_read = read(file, buffer, 119);
 		if (b_read == 0 && line_size == 0)
 			return (*exe_ret);
@@ -79,6 +82,7 @@ int my_file_cmds(char *file_path, int *exe_ret)
 		my_strcat(line, buffer);
 		old_size = line_size;
 	} while (b_read);
+
 	for (i = 0; line[i] == '\n'; i++)
 		line[i] = ' ';
 	for (; i < line_size; i++)
@@ -90,18 +94,22 @@ int my_file_cmds(char *file_path, int *exe_ret)
 				line[i] = ' ';
 		}
 	}
+
 	var_replace(&line, exe_ret);
 	process_line(&line, line_size);
 	args = my_strtok(line, " ");
 	free(line);
+
 	if (!args)
 		return (0);
+
 	if (check_arguements(args) != 0)
 	{
 		*exe_ret = 2;
 		free_arguements(args, args);
 		return (*exe_ret);
 	}
+
 	front = args;
 
 	for (i = 0; args[i]; i++)
@@ -119,5 +127,7 @@ int my_file_cmds(char *file_path, int *exe_ret)
 	ret = call_arguements(args, front, exe_ret);
 
 	free(front);
+	free_arguements(args, args);
+
 	return (ret);
 }
