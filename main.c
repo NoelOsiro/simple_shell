@@ -4,6 +4,8 @@
 void sig_handler(int sig);
 int execute(char **args, char **front);
 
+char *my_shell_name;
+int my_hist_counter;
 
 /**
  * sig_handler - Prints a new prompt upon a signal.
