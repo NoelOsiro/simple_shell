@@ -53,6 +53,7 @@ int my_shell_exit(char **args, char **front)
 	if (args[0])
 	{
 		int i = 0;
+		
 		if (args[0][0] == '+')
 		{
 			i = 1;
