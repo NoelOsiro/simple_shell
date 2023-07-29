@@ -71,8 +71,7 @@ int my_file_cmds(char *file_path, int *exe_ret)
 	if (!line)
 		return (-1);
 
-	do
-	{
+	do {
 		b_read = read(file, buffer, 119);
 		if (b_read == 0 && line_size == 0)
 			return (*exe_ret);
