@@ -105,12 +105,12 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (input == 0)
 		fflush(stream);
 	else
-		return 0; // Return 0 for end-of-file
+		return (0); // Return 0 for end-of-file
 
 	input = 0;
 	buffer = malloc(sizeof(char) * 120);
 	if (!buffer)
-		return -1; // Return -1 for error
+		return (-1); // Return -1 for error
 
 	while (c != '\n')
 	{
@@ -118,7 +118,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		if (r == -1 || (r == 0 && input == 0))
 		{
 			free(buffer);
-			return -1; // Return -1 for error
+			return (-1);
 		}
 		if (r == 0 && input != 0)
 		{
@@ -139,5 +139,5 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	ret = input;
 	if (r != 0)
 		input = 0;
-	return ret;
+	return (ret);
 }
