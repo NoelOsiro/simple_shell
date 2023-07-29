@@ -10,7 +10,7 @@ list_t *my_find_path(char *path);
  * @command: The command to locate.
  *
  * Return: If an error occurs or the command cannot be located - NULL.
- *         Otherwise - the full pathname of the command.
+ *         Otherwise - the full pathmy_shell_name of the command.
  */
 char *my_find_loc(char *command)
 {

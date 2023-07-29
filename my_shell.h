@@ -16,10 +16,10 @@
 
 /* Global environemnt */
 extern char **environ;
-/* Global program name */
-char *name;
-/* Global history counter */
-int hist;
+/* Global program my_shell_name */
+char *my_shell_name;
+/* Global my_hist_counterory counter */
+int my_hist_counter;
 
 /**
  * struct list_s - A new struct type defining a linked list.
@@ -34,24 +34,24 @@ typedef struct list_s
 
 /**
  * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
+ * @my_shell_name: The my_shell_name of the builtin command.
  * @f: A function pointer to the builtin command's function.
  */
 typedef struct builtin_s
 {
-	char *name;
+	char *my_shell_name;
 	int (*f)(char **argv, char **front);
 } builtin_t;
 
 /**
  * struct alias_s - A new struct defining aliases.
- * @name: The name of the alias.
+ * @my_shell_name: The my_shell_name of the alias.
  * @value: The value of the alias.
  * @next: A pointer to another struct alias_s.
  */
 typedef struct alias_s
 {
-	char *name;
+	char *my_shell_name;
 	char *value;
 	struct alias_s *next;
 } alias_t;
@@ -106,7 +106,7 @@ char *my_err_5(char **args);
 char *my_err_6(char **args);
 
 /* Linkedlist Helpers */
-alias_t *add_alias_end(alias_t **head, char *name, char *value);
+alias_t *add_alias_end(alias_t **head, char *my_shell_name, char *value);
 void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 void my_free_lists(list_t *head);
@@ -119,7 +119,7 @@ void my_helper_help(void);
 void my_helper_env(void);
 void my_helper_setenv(void);
 void my_helper_unsetenv(void);
-void my_helper_history(void);
+void my_helper_my_hist_counterory(void);
 int my_file_cmds(char *file_path, int *exe_ret);
 
 #endif /* MY_SHELL_H_ */

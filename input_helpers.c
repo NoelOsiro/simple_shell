@@ -29,7 +29,7 @@ char *get_arguements(char *line, int *exe_ret)
 		return (NULL);
 	if (read == 1)
 	{
-		hist++;
+		my_hist_counter++;
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, prompt, 2);
 		return (get_arguements(line, exe_ret));
@@ -127,7 +127,7 @@ int run_arguements(char **args, char **front, int *exe_ret)
 		ret = *exe_ret;
 	}
 
-	hist++;
+	my_hist_counter++;
 
 	for (i = 0; args[i]; i++)
 		free(args[i]);

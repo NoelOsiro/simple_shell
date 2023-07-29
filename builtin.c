@@ -26,9 +26,9 @@ int (*get_builtin(char *command))(char **args, char **front)
 	};
 	int i;
 
-	for (i = 0; funcs[i].name; i++)
+	for (i = 0; funcs[i].my_shell_name; i++)
 	{
-		if (my_strcmp(funcs[i].name, command) == 0)
+		if (my_strcmp(funcs[i].my_shell_name, command) == 0)
 			break;
 	}
 	return (funcs[i].f);
@@ -184,7 +184,7 @@ int my_shell_help(char **args, char __attribute__((__unused__)) **front)
 	else if (my_strcmp(args[0], "help") == 0)
 		my_helper_help();
 	else
-		write(STDERR_FILENO, name, my_strlen(name));
+		write(STDERR_FILENO, my_shell_name, my_strlen(my_shell_name));
 
 	return (0);
 }

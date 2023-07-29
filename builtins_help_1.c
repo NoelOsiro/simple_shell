@@ -14,9 +14,9 @@ void my_helper_all(void)
 	char *msg = "my_shell\nThese shell commands are defined internally.\n";
 
 	write(STDOUT_FILENO, msg, my_strlen(msg));
-	msg = "Type 'help' to see this list.\nType 'help name' to find ";
+	msg = "Type 'help' to see this list.\nType 'help my_shell_name' to find ";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
-	msg = "out more about the function 'name'.\n\n  alias   \t";
+	msg = "out more about the function 'my_shell_name'.\n\n  alias   \t";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 	msg = "alias [NAME[='VALUE'] ...]\n  cd    \tcd   ";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
@@ -37,9 +37,9 @@ void my_helper_alias(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 	msg = "\n\talias: Prints a list of all aliases, one per line, in ";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
-	msg = "the format NAME='VALUE'.\n\talias name [name2 ...]:prints";
+	msg = "the format NAME='VALUE'.\n\talias my_shell_name [my_shell_name2 ...]:prints";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
-	msg = " the aliases name, name2, etc. one per line, in the ";
+	msg = " the aliases my_shell_name, my_shell_name2, etc. one per line, in the ";
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 	msg = "form NAME='VALUE'.\n\talias NAME='VALUE' [...]: Defines";
 	write(STDOUT_FILENO, msg, my_strlen(msg));

@@ -3,7 +3,7 @@
 void my_helper_env(void);
 void my_helper_setenv(void);
 void my_helper_unsetenv(void);
-void my_helper_history(void);
+void my_helper_my_hist_counterory(void);
 
 /**
  * my_helper_env - Displays information on the my_shell builtin command 'env'.

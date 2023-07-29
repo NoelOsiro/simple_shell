@@ -4,6 +4,7 @@
 void sig_handler(int sig);
 int execute(char **args, char **front);
 
+
 /**
  * sig_handler - Prints a new prompt upon a signal.
  * @sig: The signal.
@@ -88,8 +89,8 @@ int main(int argc, char *argv[])
 	int *exe_ret = &retn;
 	char *prompt = "$ ", *new_line = "\n";
 
-	name = argv[0];
-	hist = 1;
+	my_shell_name = argv[0];
+	my_hist_counter = 1;
 	aliases = NULL;
 	signal(SIGINT, sig_handler);
 
