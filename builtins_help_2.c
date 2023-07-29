@@ -15,7 +15,7 @@ void my_helper_env(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * my_helper_setenv - Displays information on the my_shell builtin command 'setenv'.
+ * my_helper_setenv - Displays information on the my_shell command 'setenv'.
  */
 void my_helper_setenv(void)
 {

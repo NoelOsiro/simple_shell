@@ -11,7 +11,7 @@ void my_helper_help(void);
  */
 void my_helper_all(void)
 {
-	char *msg = "Shellby\nThese shell commands are defined internally.\n";
+	char *msg = "my_shell\nThese shell commands are defined internally.\n";
 
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 	msg = "Type 'help' to see this list.\nType 'help name' to find ";
@@ -28,7 +28,7 @@ void my_helper_all(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * my_helper_alias - Displays information on the my_shell builtin command 'alias'.
+ * my_helper_alias - Displays information on the my_shell command 'alias'.
  */
 void my_helper_alias(void)
 {
@@ -70,7 +70,7 @@ void my_helper_cd(void)
 }
 
 /**
- * my_helper_exit - Displays information on the my_shell builtin command 'exit'.
+ * my_helper_exit - Displays information on the my_shell command 'exit'.
  */
 void my_helper_exit(void)
 {
@@ -85,11 +85,11 @@ void my_helper_exit(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * my_helper_help - Displays information on the my_shell builtin command 'help'.
+ * my_helper_help - Displays information on the my_shell command 'help'.
  */
 void my_helper_help(void)
 {
-	char *msg = "help: help\n\tSee all possible Shellby builtin commands.\n";
+	char *msg = "help: help\n\tSee all possible my_shell builtin commands.\n";
 
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 	msg = "\n      help [BUILTIN NAME]\n\tSee specific information on each ";
