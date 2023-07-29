@@ -93,7 +93,7 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
  * @n: The size of lineptr.
  * @stream: The stream to read from.
  *
- * Return: The number of bytes read.
+ * Return: The number of bytes read, 0 for end-of-file, or -1 for error.
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
@@ -105,12 +105,12 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (input == 0)
 		fflush(stream);
 	else
-		return (-1);
-	input = 0;
+		return 0; // Return 0 for end-of-file
 
+	input = 0;
 	buffer = malloc(sizeof(char) * 120);
 	if (!buffer)
-		return (-1);
+		return -1; // Return -1 for error
 
 	while (c != '\n')
 	{
@@ -118,7 +118,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		if (r == -1 || (r == 0 && input == 0))
 		{
 			free(buffer);
-			return (-1);
+			return -1; // Return -1 for error
 		}
 		if (r == 0 && input != 0)
 		{
@@ -139,5 +139,5 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	ret = input;
 	if (r != 0)
 		input = 0;
-	return (ret);
+	return ret;
 }
