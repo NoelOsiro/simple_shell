@@ -2,7 +2,7 @@
 #include "my_shell.h"
 
 int my_shell_alias(char **args, char __attribute__((__unused__)) **front);
-void set_alias(char *var_my_shell_name, char *value);
+void set_alias(char *var_my_name, char *value);
 void print_alias(alias_t *alias);
 
 /**
@@ -37,7 +37,7 @@ int my_shell_alias(char **args, char __attribute__((__unused__)) **front)
 		{
 			while (temp)
 			{
-				if (my_strcmp(args[i], temp->my_shell_name) == 0)
+				if (my_strcmp(args[i], temp->my_name) == 0)
 				{
 					print_alias(temp);
 					break;
@@ -53,12 +53,12 @@ int my_shell_alias(char **args, char __attribute__((__unused__)) **front)
 	return (ret);
 }
 /**
- * set_alias - Will either set an existing alias 'my_shell_name' with a new value,
- * 'value' or creates a new alias with 'my_shell_name' and 'value'.
- * @var_my_shell_name: Name of the alias.
+ * set_alias - Will either set an  alias 'my_name' with a new value,
+ * 'value' or creates a new alias with 'my_name' and 'value'.
+ * @var_my_name: Name of the alias.
  * @value: Value of the alias. First character is a '='.
  */
-void set_alias(char *var_my_shell_name, char *value)
+void set_alias(char *var_my_name, char *value)
 {
 	alias_t *temp = aliases;
 	int len, j, k;
@@ -78,7 +78,7 @@ void set_alias(char *var_my_shell_name, char *value)
 	new_value[k] = '\0';
 	while (temp)
 	{
-		if (my_strcmp(var_my_shell_name, temp->my_shell_name) == 0)
+		if (my_strcmp(var_my_name, temp->my_name) == 0)
 		{
 			free(temp->value);
 			temp->value = new_value;
@@ -87,22 +87,22 @@ void set_alias(char *var_my_shell_name, char *value)
 		temp = temp->next;
 	}
 	if (!temp)
-		add_alias_end(&aliases, var_my_shell_name, new_value);
+		add_alias_end(&aliases, var_my_name, new_value);
 }
 
 /**
- * print_alias - Prints the alias in the format my_shell_name='value'.
+ * print_alias - Prints the alias in the format my_name='value'.
  * @alias: Pointer to an alias.
  */
 void print_alias(alias_t *alias)
 {
 	char *alias_string;
-	int len = my_strlen(alias->my_shell_name) + my_strlen(alias->value) + 4;
+	int len = my_strlen(alias->my_name) + my_strlen(alias->value) + 4;
 
 	alias_string = malloc(sizeof(char) * (len + 1));
 	if (!alias_string)
 		return;
-	my_strcpy(alias_string, alias->my_shell_name);
+	my_strcpy(alias_string, alias->my_name);
 	my_strcat(alias_string, "='");
 	my_strcat(alias_string, alias->value);
 	my_strcat(alias_string, "'\n");
@@ -131,7 +131,7 @@ char **replace_aliases(char **args)
 		temp = aliases;
 		while (temp)
 		{
-			if (my_strcmp(args[i], temp->my_shell_name) == 0)
+			if (my_strcmp(args[i], temp->my_name) == 0)
 			{
 				new_value = malloc(sizeof(char) * (my_strlen(temp->value) + 1));
 				if (!new_value)

@@ -4,7 +4,7 @@
 void sig_handler(int sig);
 int execute(char **args, char **front);
 
-char *my_shell_name;
+char *my_name;
 int my_hist_counter;
 
 /**
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 	int *exe_ret = &retn;
 	char *prompt = "$ ", *new_line = "\n";
 
-	my_shell_name = argv[0];
+	my_name = argv[0];
 	my_hist_counter = 1;
 	aliases = NULL;
 	signal(SIGINT, sig_handler);

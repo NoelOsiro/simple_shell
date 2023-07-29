@@ -126,7 +126,7 @@ void var_replace(char **line, int *exe_ret)
 			}
 			else if (old_line[j + 1])
 			{
-				/* extract the variable my_shell_name to search for */
+				/* extract the variable my_name to search for */
 				for (k = j + 1; old_line[k] &&
 						old_line[k] != '$' &&
 						old_line[k] != ' '; k++)

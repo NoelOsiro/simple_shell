@@ -56,7 +56,7 @@ void my_free_env(void)
 
 /**
  * my_get_env - Gets an environmental variable from the PATH.
- * @var: The my_shell_name of the environmental variable to get.
+ * @var: The my_name of the environmental variable to get.
  *
  * Return: If the environmental variable does not exist - NULL.
  *         Otherwise - a pointer to the environmental variable.

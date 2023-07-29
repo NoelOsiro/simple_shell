@@ -12,29 +12,29 @@ int my_file_cmds(char *file_path, int *exe_ret);
  */
 int cant_open(char *file_path)
 {
-	char *error, *my_hist_counter_str;
+	char *error, *ctr_str;
 	int len;
 
-	my_hist_counter_str = my_shell_itoa(my_hist_counter);
-	if (!my_hist_counter_str)
+	ctr_str = my_shell_itoa(my_hist_counter);
+	if (!ctr_str)
 		return (127);
 
-	len = my_strlen(my_shell_name) + my_strlen(my_hist_counter_str) + my_strlen(file_path) + 16;
+	len = my_strlen(my_name) + my_strlen(ctr_str) + my_strlen(file_path) + 16;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(my_hist_counter_str);
+		free(ctr_str);
 		return (127);
 	}
 
-	my_strcpy(error, my_shell_name);
+	my_strcpy(error, my_name);
 	my_strcat(error, ": ");
-	my_strcat(error, my_hist_counter_str);
+	my_strcat(error, ctr_str);
 	my_strcat(error, ": Can't open ");
 	my_strcat(error, file_path);
 	my_strcat(error, "\n");
 
-	free(my_hist_counter_str);
+	free(ctr_str);
 	write(STDERR_FILENO, error, len);
 	free(error);
 	return (127);
