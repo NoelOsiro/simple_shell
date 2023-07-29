@@ -17,9 +17,9 @@
 /* Global environemnt */
 extern char **environ;
 /* Global program my_shell_name */
-char *my_shell_name;
+extern char *my_shell_name;
 /* Global my_hist_counterory counter */
-int my_hist_counter;
+extern int my_hist_counter;
 
 /**
  * struct list_s - A new struct type defining a linked list.
