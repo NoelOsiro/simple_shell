@@ -3,7 +3,7 @@
 alias_t *add_alias_end(alias_t **head, char *name, char *value);
 void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
-void free_list(list_t *head);
+void my_free_lists(list_t *head);
 
 /**
  * add_alias_end - Adds a node to the end of a alias_t linked list.
@@ -30,7 +30,7 @@ alias_t *add_alias_end(alias_t **head, char *name, char *value)
 		return (NULL);
 	}
 	new_node->value = value;
-	_strcpy(new_node->name, name);
+	my_strcpy(new_node->name, name);
 
 	if (*head)
 	{
@@ -96,10 +96,10 @@ void free_alias_list(alias_t *head)
 }
 
 /**
- * free_list - Frees a list_t linked list.
+ * my_free_lists - Frees a list_t linked list.
  * @head: The head of the list_t list.
  */
-void free_list(list_t *head)
+void my_free_lists(list_t *head)
 {
 	list_t *next;
 

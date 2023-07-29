@@ -1,21 +1,21 @@
 
 #include "my_shell.h"
 
-char *error_126(char **args);
-char *error_127(char **args);
+char *my_err_5(char **args);
+char *my_err_6(char **args);
 
 /**
- * error_126 - Creates an error message for permission denied failures.
+ * my_err_5 - Creates an error message for permission denied failures.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_126(char **args)
+char *my_err_5(char **args)
 {
 	char *error, *hist_str;
 	int len;
 
-	hist_str = _itoa(hist);
+	hist_str = my_shell_itoa(hist);
 	if (!hist_str)
 		return (NULL);
 
@@ -27,29 +27,29 @@ char *error_126(char **args)
 		return (NULL);
 	}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": Permission denied\n");
+	my_strcpy(error, name);
+	my_strcat(error, ": ");
+	my_strcat(error, hist_str);
+	my_strcat(error, ": ");
+	my_strcat(error, args[0]);
+	my_strcat(error, ": Permission denied\n");
 
 	free(hist_str);
 	return (error);
 }
 
 /**
- * error_127 - Creates an error message for command not found failures.
+ * my_err_6 - Creates an error message for command not found failures.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_127(char **args)
+char *my_err_6(char **args)
 {
 	char *error, *hist_str;
 	int len;
 
-	hist_str = _itoa(hist);
+	hist_str = my_shell_itoa(hist);
 	if (!hist_str)
 		return (NULL);
 
@@ -61,12 +61,12 @@ char *error_127(char **args)
 		return (NULL);
 	}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": not found\n");
+	my_strcpy(error, name);
+	my_strcat(error, ": ");
+	my_strcat(error, hist_str);
+	my_strcat(error, ": ");
+	my_strcat(error, args[0]);
+	my_strcat(error, ": not found\n");
 
 	free(hist_str);
 	return (error);

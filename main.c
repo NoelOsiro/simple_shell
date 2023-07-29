@@ -34,15 +34,15 @@ int execute(char **args, char **front)
 	if (command[0] != '/' && command[0] != '.')
 	{
 		flag = 1;
-		command = get_location(command);
+		command = my_find_loc(command);
 	}
 
 	if (!command || (access(command, F_OK) == -1))
 	{
 		if (errno == EACCES)
-			ret = (create_error(args, 126));
+			ret = (my_create_err(args, 126));
 		else
-			ret = (create_error(args, 127));
+			ret = (my_create_err(args, 127));
 	}
 	else
 	{
@@ -58,9 +58,9 @@ int execute(char **args, char **front)
 		{
 			execve(command, args, environ);
 			if (errno == EACCES)
-				ret = (create_error(args, 126));
-			free_env();
-			free_args(args, front);
+				ret = (my_create_err(args, 126));
+			my_free_env();
+			free_arguements(args, front);
 			free_alias_list(aliases);
 			_exit(ret);
 		}
@@ -94,14 +94,14 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sig_handler);
 
 	*exe_ret = 0;
-	environ = _copyenv();
+	environ = my_copy_env();
 	if (!environ)
 		exit(-100);
 
 	if (argc != 1)
 	{
-		ret = proc_file_commands(argv[1], exe_ret);
-		free_env();
+		ret = my_file_cmds(argv[1], exe_ret);
+		my_free_env();
 		free_alias_list(aliases);
 		return (*exe_ret);
 	}
@@ -109,8 +109,8 @@ int main(int argc, char *argv[])
 	if (!isatty(STDIN_FILENO))
 	{
 		while (ret != END_OF_FILE && ret != EXIT)
-			ret = handle_args(exe_ret);
-		free_env();
+			ret = handle_arguements(exe_ret);
+		my_free_env();
 		free_alias_list(aliases);
 		return (*exe_ret);
 	}
@@ -118,18 +118,18 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		write(STDOUT_FILENO, prompt, 2);
-		ret = handle_args(exe_ret);
+		ret = handle_arguements(exe_ret);
 		if (ret == END_OF_FILE || ret == EXIT)
 		{
 			if (ret == END_OF_FILE)
 				write(STDOUT_FILENO, new_line, 1);
-			free_env();
+			my_free_env();
 			free_alias_list(aliases);
 			exit(*exe_ret);
 		}
 	}
 
-	free_env();
+	my_free_env();
 	free_alias_list(aliases);
 	return (*exe_ret);
 }

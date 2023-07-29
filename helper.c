@@ -1,17 +1,17 @@
 
 #include "my_shell.h"
 
-void free_args(char **args, char **front);
+void free_arguements(char **args, char **front);
 char *get_pid(void);
 char *get_env_value(char *beginning, int len);
-void variable_replacement(char **args, int *exe_ret);
+void var_replace(char **args, int *exe_ret);
 
 /**
- * free_args - Frees up memory taken by args.
+ * free_arguements - Frees up memory taken by args.
  * @args: A null-terminated double pointer containing commands/arguments.
  * @front: A double pointer to the beginning of args.
  */
-void free_args(char **args, char **front)
+void free_arguements(char **args, char **front)
 {
 	size_t i;
 
@@ -76,9 +76,9 @@ char *get_env_value(char *beginning, int len)
 	if (!var)
 		return (NULL);
 	var[0] = '\0';
-	_strncat(var, beginning, len);
+	my_strncat(var, beginning, len);
 
-	var_addr = _getenv(var);
+	var_addr = my_get_env(var);
 	free(var);
 	if (var_addr)
 	{
@@ -88,14 +88,14 @@ char *get_env_value(char *beginning, int len)
 		temp++;
 		replacement = malloc(my_strlen(temp) + 1);
 		if (replacement)
-			_strcpy(replacement, temp);
+			my_strcpy(replacement, temp);
 	}
 
 	return (replacement);
 }
 
 /**
- * variable_replacement - Handles variable replacement.
+ * var_replace - Handles variable replacement.
  * @line: A double pointer containing the command and arguments.
  * @exe_ret: A pointer to the return value of the last executed command.
  *
@@ -103,7 +103,7 @@ char *get_env_value(char *beginning, int len)
  *              of the last executed program, and envrionmental variables
  *              preceded by $ with their corresponding value.
  */
-void variable_replacement(char **line, int *exe_ret)
+void var_replace(char **line, int *exe_ret)
 {
 	int j, k = 0, len;
 	char *replacement = NULL, *old_line = NULL, *new_line;
@@ -121,7 +121,7 @@ void variable_replacement(char **line, int *exe_ret)
 			}
 			else if (old_line[j + 1] == '?')
 			{
-				replacement = _itoa(*exe_ret);
+				replacement = my_shell_itoa(*exe_ret);
 				k = j + 2;
 			}
 			else if (old_line[j + 1])
@@ -139,14 +139,14 @@ void variable_replacement(char **line, int *exe_ret)
 			if (!line)
 				return;
 			new_line[0] = '\0';
-			_strncat(new_line, old_line, j);
+			my_strncat(new_line, old_line, j);
 			if (replacement)
 			{
-				_strcat(new_line, replacement);
+				my_strcat(new_line, replacement);
 				free(replacement);
 				replacement = NULL;
 			}
-			_strcat(new_line, &old_line[k]);
+			my_strcat(new_line, &old_line[k]);
 			free(old_line);
 			*line = new_line;
 			old_line = new_line;

@@ -2,8 +2,8 @@
 #include "my_shell.h"
 
 int num_len(int num);
-char *_itoa(int num);
-int create_error(char **args, int err);
+char *my_shell_itoa(int num);
+int my_create_err(char **args, int err);
 
 /**
  * num_len - Counts the digit length of a number.
@@ -35,12 +35,12 @@ int num_len(int num)
 }
 
 /**
- * _itoa - Converts an integer to a string.
+ * my_shell_itoa - Converts an integer to a string.
  * @num: The integer.
  *
  * Return: The converted string.
  */
-char *_itoa(int num)
+char *my_shell_itoa(int num)
 {
 	char *buffer;
 	int len = num_len(num);
@@ -73,37 +73,37 @@ char *_itoa(int num)
 }
 
 /**
- * create_error - Writes a custom error message to stderr.
+ * my_create_err - Writes a custom error message to stderr.
  * @args: An array of arguments.
  * @err: The error value.
  *
  * Return: The error value.
  */
-int create_error(char **args, int err)
+int my_create_err(char **args, int err)
 {
 	char *error;
 
 	switch (err)
 	{
 	case -1:
-		error = error_env(args);
+		error = my_err_env(args);
 		break;
 	case 1:
-		error = error_1(args);
+		error = my_err_1(args);
 		break;
 	case 2:
 		if (*(args[0]) == 'e')
-			error = error_2_exit(++args);
+			error = my_err_2(++args);
 		else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
-			error = error_2_syntax(args);
+			error = my_err_4(args);
 		else
-			error = error_2_cd(args);
+			error = my_err_3(args);
 		break;
 	case 126:
-		error = error_126(args);
+		error = my_err_5(args);
 		break;
 	case 127:
-		error = error_127(args);
+		error = my_err_6(args);
 		break;
 	}
 	write(STDERR_FILENO, error, my_strlen(error));

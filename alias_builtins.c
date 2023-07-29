@@ -1,12 +1,12 @@
 
 #include "my_shell.h"
 
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
+int my_shell_alias(char **args, char __attribute__((__unused__)) **front);
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
 
 /**
- * shellby_alias - Builtin command that either prints all aliases, specific
+ * my_shell_alias - Builtin command that either prints all aliases, specific
  * aliases, or sets an alias.
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
@@ -14,7 +14,7 @@ void print_alias(alias_t *alias);
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
-int shellby_alias(char **args, char __attribute__((__unused__)) **front)
+int my_shell_alias(char **args, char __attribute__((__unused__)) **front)
 {
 	alias_t *temp = aliases;
 	int i, ret = 0;
@@ -45,7 +45,7 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 				temp = temp->next;
 			}
 			if (!temp)
-				ret = create_error(args + i, 1);
+				ret = my_create_err(args + i, 1);
 		}
 		else
 			set_alias(args[i], value);
@@ -102,10 +102,10 @@ void print_alias(alias_t *alias)
 	alias_string = malloc(sizeof(char) * (len + 1));
 	if (!alias_string)
 		return;
-	_strcpy(alias_string, alias->name);
-	_strcat(alias_string, "='");
-	_strcat(alias_string, alias->value);
-	_strcat(alias_string, "'\n");
+	my_strcpy(alias_string, alias->name);
+	my_strcat(alias_string, "='");
+	my_strcat(alias_string, alias->value);
+	my_strcat(alias_string, "'\n");
 
 	write(STDOUT_FILENO, alias_string, len);
 	free(alias_string);
@@ -136,10 +136,10 @@ char **replace_aliases(char **args)
 				new_value = malloc(sizeof(char) * (my_strlen(temp->value) + 1));
 				if (!new_value)
 				{
-					free_args(args, args);
+					free_arguements(args, args);
 					return (NULL);
 				}
-				_strcpy(new_value, temp->value);
+				my_strcpy(new_value, temp->value);
 				free(args[i]);
 				args[i] = new_value;
 				i--;

@@ -62,75 +62,64 @@ alias_t *aliases;
 /* Main Helpers */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char **_strtok(char *line, char *delim);
-char *get_location(char *command);
-list_t *get_path_dir(char *path);
+char **my_strtok(char *line, char *delim);
+char *my_find_loc(char *command);
+list_t *my_find_path(char *path);
 int execute(char **args, char **front);
-void free_list(list_t *head);
-char *_itoa(int num);
-
-/* Input Helpers */
-void handle_line(char **line, ssize_t read);
-void variable_replacement(char **args, int *exe_ret);
-char *get_args(char *line, int *exe_ret);
-int call_args(char **args, char **front, int *exe_ret);
-int run_args(char **args, char **front, int *exe_ret);
-int handle_args(int *exe_ret);
-int check_args(char **args);
-void free_args(char **args, char **front);
+void my_free_lists(list_t *head);
+char *my_shell_itoa(int num);
+void process_line(char **line, ssize_t read);
+void var_replace(char **args, int *exe_ret);
+char *get_arguements(char *line, int *exe_ret);
+int call_arguements(char **args, char **front, int *exe_ret);
+int run_arguements(char **args, char **front, int *exe_ret);
+int handle_arguements(int *exe_ret);
+int check_arguements(char **args);
+void free_arguements(char **args, char **front);
 char **replace_aliases(char **args);
-
-/* String functions */
 int my_strlen(const char *s);
-char *_strcat(char *dest, const char *src);
-char *_strncat(char *dest, const char *src, size_t n);
-char *_strcpy(char *dest, const char *src);
+char *my_strcat(char *dest, const char *src);
+char *my_strncat(char *dest, const char *src, size_t n);
+char *my_strcpy(char *dest, const char *src);
 char *my_strchr(char *s, char c);
 int my_strspn(char *s, char *accept);
 int my_strcmp(char *s1, char *s2);
 int my_strncmp(const char *s1, const char *s2, size_t n);
-
-/* Builtins */
 int (*get_builtin(char *command))(char **args, char **front);
-int shellby_exit(char **args, char **front);
-int shellby_env(char **args, char __attribute__((__unused__)) **front);
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_cd(char **args, char __attribute__((__unused__)) **front);
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
-int shellby_help(char **args, char __attribute__((__unused__)) **front);
-
-/* Builtin Helpers */
-char **_copyenv(void);
-void free_env(void);
-char **_getenv(const char *var);
-
-/* Error Handling */
-int create_error(char **args, int err);
-char *error_env(char **args);
-char *error_1(char **args);
-char *error_2_exit(char **args);
-char *error_2_cd(char **args);
-char *error_2_syntax(char **args);
-char *error_126(char **args);
-char *error_127(char **args);
+int my_shell_exit(char **args, char **front);
+int my_shell_env(char **args, char __attribute__((__unused__)) **front);
+int my_shell_setenv(char **args, char __attribute__((__unused__)) **front);
+int my_shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
+int my_shell_cd(char **args, char __attribute__((__unused__)) **front);
+int my_shell_alias(char **args, char __attribute__((__unused__)) **front);
+int my_shell_help(char **args, char __attribute__((__unused__)) **front);
+char **my_copy_env(void);
+void my_free_env(void);
+char **my_get_env(const char *var);
+int my_create_err(char **args, int err);
+char *my_err_env(char **args);
+char *my_err_1(char **args);
+char *my_err_2(char **args);
+char *my_err_3(char **args);
+char *my_err_4(char **args);
+char *my_err_5(char **args);
+char *my_err_6(char **args);
 
 /* Linkedlist Helpers */
 alias_t *add_alias_end(alias_t **head, char *name, char *value);
 void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
-void free_list(list_t *head);
+void my_free_lists(list_t *head);
 
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_history(void);
-
-int proc_file_commands(char *file_path, int *exe_ret);
+void my_helper_all(void);
+void my_helper_alias(void);
+void my_helper_cd(void);
+void my_helper_exit(void);
+void my_helper_help(void);
+void my_helper_env(void);
+void my_helper_setenv(void);
+void my_helper_unsetenv(void);
+void my_helper_history(void);
+int my_file_cmds(char *file_path, int *exe_ret);
 
 #endif /* MY_SHELL_H_ */

@@ -1,23 +1,23 @@
 #include "my_shell.h"
 
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_history(void);
+void my_helper_env(void);
+void my_helper_setenv(void);
+void my_helper_unsetenv(void);
+void my_helper_history(void);
 
 /**
- * help_env - Displays information on the shellby builtin command 'env'.
+ * my_helper_env - Displays information on the my_shell builtin command 'env'.
  */
-void help_env(void)
+void my_helper_env(void)
 {
 	char *msg = "env: env\n\tPrints the current environment.\n";
 
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * help_setenv - Displays information on the shellby builtin command 'setenv'.
+ * my_helper_setenv - Displays information on the my_shell builtin command 'setenv'.
  */
-void help_setenv(void)
+void my_helper_setenv(void)
 {
 	char *msg = "setenv: setenv [VARIABLE] [VALUE]\n\tInitializes a new";
 
@@ -28,10 +28,10 @@ void help_setenv(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * help_unsetenv - Displays information on the shellby builtin command
+ * my_helper_unsetenv - Displays information on the my_shell builtin command
  * 'unsetenv'.
  */
-void help_unsetenv(void)
+void my_helper_unsetenv(void)
 {
 	char *msg = "unsetenv: unsetenv [VARIABLE]\n\tRemoves an ";
 

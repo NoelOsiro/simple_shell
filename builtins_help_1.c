@@ -1,15 +1,15 @@
 #include "my_shell.h"
 
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
+void my_helper_all(void);
+void my_helper_alias(void);
+void my_helper_cd(void);
+void my_helper_exit(void);
+void my_helper_help(void);
 
 /**
- * help_all - Displays all possible builtin shellby commands.
+ * my_helper_all - Displays all possible builtin my_shell commands.
  */
-void help_all(void)
+void my_helper_all(void)
 {
 	char *msg = "Shellby\nThese shell commands are defined internally.\n";
 
@@ -28,9 +28,9 @@ void help_all(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * help_alias - Displays information on the shellby builtin command 'alias'.
+ * my_helper_alias - Displays information on the my_shell builtin command 'alias'.
  */
-void help_alias(void)
+void my_helper_alias(void)
 {
 	char *msg = "alias: alias [NAME[='VALUE'] ...]\n\tHandles aliases.\n";
 
@@ -50,9 +50,9 @@ void help_alias(void)
 }
 
 /**
- * help_cd - Displays information on the shellby builtin command 'cd'.
+ * my_helper_cd - Displays information on the my_shell builtin command 'cd'.
  */
-void help_cd(void)
+void my_helper_cd(void)
 {
 	char *msg = "cd: cd [DIRECTORY]\n\tChanges the current directory of the";
 
@@ -70,9 +70,9 @@ void help_cd(void)
 }
 
 /**
- * help_exit - Displays information on the shellby builtin command 'exit'.
+ * my_helper_exit - Displays information on the my_shell builtin command 'exit'.
  */
-void help_exit(void)
+void my_helper_exit(void)
 {
 	char *msg = "exit: exit [STATUS]\n\tExits the shell.\n\n\tThe ";
 
@@ -85,9 +85,9 @@ void help_exit(void)
 	write(STDOUT_FILENO, msg, my_strlen(msg));
 }
 /**
- * help_help - Displays information on the shellby builtin command 'help'.
+ * my_helper_help - Displays information on the my_shell builtin command 'help'.
  */
-void help_help(void)
+void my_helper_help(void)
 {
 	char *msg = "help: help\n\tSee all possible Shellby builtin commands.\n";
 

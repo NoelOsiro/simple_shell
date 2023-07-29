@@ -3,7 +3,7 @@
 
 int token_len(char *str, char *delim);
 int count_tokens(char *str, char *delim);
-char **_strtok(char *line, char *delim);
+char **my_strtok(char *line, char *delim);
 
 /**
  * token_len - Locates the delimiter index marking the end
@@ -55,13 +55,13 @@ int count_tokens(char *str, char *delim)
 }
 
 /**
- * _strtok - Tokenizes a string.
+ * my_strtok - Tokenizes a string.
  * @line: The string.
  * @delim: The delimiter character to tokenize the string by.
  *
  * Return: A pointer to an array containing the tokenized words.
  */
-char **_strtok(char *line, char *delim)
+char **my_strtok(char *line, char *delim)
 {
 	char **ptr;
 	int index = 0, tokens, t, letters, l;
