@@ -41,37 +41,41 @@ int (*get_builtin(char *command))(char **args, char **front)
  *
  * Return: If there are no arguments - -3.
  *         If the given exit value is invalid - 2.
- *         O/w - exits with the given status value.
+ *         exits with the given status value.
  *
  * Description: Upon returning -3, the program exits back in the main function.
  */
 int my_shell_exit(char **args, char **front)
 {
-	int i, len_of_int = 10;
-	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
+	int len_of_int = 10;
+	int num = 0;
 
 	if (args[0])
 	{
+		int i = 0;
 		if (args[0][0] == '+')
 		{
 			i = 1;
-			len_of_int++;
 		}
 		for (; args[0][i]; i++)
 		{
-			if (i <= len_of_int && args[0][i] >= '0' && args[0][i] <= '9')
+			if (i < len_of_int && args[0][i] >= '0' && args[0][i] <= '9')
+			{
 				num = (num * 10) + (args[0][i] - '0');
+			}
 			else
-				return (my_create_err(--args, 2));
+			{
+				return (my_create_err(args, 2));
+			}
 		}
 	}
 	else
 	{
 		return (-3);
 	}
-	if (num > max - 1)
-		return (my_create_err(--args, 2));
-	args -= 1;
+
+	args--;
+
 	free_arguements(args, front);
 	my_free_env();
 	free_alias_list(aliases);
